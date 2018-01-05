@@ -1,0 +1,10 @@
+/home/semiash/projects/C2CGen/HtmlGen/Index/bin/Debug/netcoreapp2.0/Index.deps.json
+/home/semiash/projects/C2CGen/HtmlGen/Index/bin/Debug/netcoreapp2.0/Index.runtimeconfig.json
+/home/semiash/projects/C2CGen/HtmlGen/Index/bin/Debug/netcoreapp2.0/Index.runtimeconfig.dev.json
+/home/semiash/projects/C2CGen/HtmlGen/Index/bin/Debug/netcoreapp2.0/Index.dll
+/home/semiash/projects/C2CGen/HtmlGen/Index/bin/Debug/netcoreapp2.0/Index.pdb
+/home/semiash/projects/C2CGen/HtmlGen/Index/obj/Debug/netcoreapp2.0/Index.csproj.CoreCompileInputs.cache
+/home/semiash/projects/C2CGen/HtmlGen/Index/obj/Debug/netcoreapp2.0/Index.AssemblyInfoInputs.cache
+/home/semiash/projects/C2CGen/HtmlGen/Index/obj/Debug/netcoreapp2.0/Index.AssemblyInfo.cs
+/home/semiash/projects/C2CGen/HtmlGen/Index/obj/Debug/netcoreapp2.0/Index.dll
+/home/semiash/projects/C2CGen/HtmlGen/Index/obj/Debug/netcoreapp2.0/Index.pdb
