@@ -118,21 +118,21 @@ namespace C2C
 
     internal class ExtensionContentTypeMap
     {
-        private static Dictionary<string, string> types;
-        private Dictionary<string, string> Types()
+        private static Dictionary<string, string> types = new Dictionary<string, string>
         {
-            if (types is null)
-            {
-                types = new Dictionary<string, string>();
-                types.Add(".html", "text/HTML");
-                types.Add(".css", "text/plain");
-                types.Add(".js", "text/plain");
-                types.Add(".jpeg", "image/JPEG");
-                types.Add(".jpg", "image/JPEG");
-            }
-            return types;
+                {".html", "text/HTML"},
+                {".css", "text/plain"},
+                {".js", "text/plain"},
+                {".jpeg", "image/JPEG"},
+                {".jpg", "image/JPEG"}
+        };
+       
+        public string this[string extension] 
+        { 
+            get => 
+                types.ContainsKey(extension) 
+                ? types[extension] 
+                : "text/plain"; 
         }
-
-        public string this[string extension] { get => Types().ContainsKey(extension) ? Types()[extension] : "text/plain"; }
     }
 }
