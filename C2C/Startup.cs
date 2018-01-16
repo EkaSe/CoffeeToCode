@@ -20,11 +20,11 @@ namespace C2C
                 await context.Response.WriteAsync("Hello world!");
             });
 
-            app.MapWhen(
-                context => context.Request.Path.ToString().EndsWith(".report"),
-                appBranch => {
-                    appBranch.UseMyHandler();
-                });
+            // app.MapWhen(
+            //     context => context.Request.Path.ToString().EndsWith(".report"),
+            //     appBranch => {
+            //         appBranch.UseMyHandler();
+            //     });
 
             app.UseDefaultFiles();            
         }        
