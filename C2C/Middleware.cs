@@ -27,7 +27,8 @@ namespace C2C
 
         public async Task Invoke(HttpContext context)
         {
-            await GeneratePage(context, context.Request.QueryString.ToString().Substring(1));
+            //await GeneratePage(context, context.Request.QueryString.ToString().Substring(1));
+            await StreamHtml(context, context.Request.QueryString.ToString().Substring(1));
         }
 
         private static async Task GeneratePage(HttpContext context, string requestedFile)
@@ -113,6 +114,60 @@ namespace C2C
 
             process.Start();
             process.WaitForExit();
+        }
+
+        private static async Task StreamHtml(HttpContext context, string request)
+        {
+            string resultText = "";
+
+            try 
+            {
+                resultText = CaptureConsoleOutput(request);
+                context.Response.ContentType = "text/HTML";
+            }
+            catch (Exception e)
+            {
+                resultText = e.Message;
+                context.Response.ContentType = "text/plain";
+            }
+
+            byte[] buffer = Encoding.UTF8.GetBytes(resultText);
+
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
+
+            using (var stream = context.Response.Body)
+            {
+                await stream.WriteAsync(buffer, 0, buffer.Length);
+                await stream.FlushAsync();
+            }
+
+            context.Response.ContentLength = buffer.Length;
+        }
+
+        private static string CaptureConsoleOutput(string request)
+        {
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory = "HtmlStream",
+                    FileName = "dotnet",
+                    Arguments = $"{request}.dll",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            process.Start();
+
+            string result = process.StandardOutput.ReadToEnd();
+
+            process.WaitForExit();
+            process.Close();
+
+            return result;
         }
     }
 
