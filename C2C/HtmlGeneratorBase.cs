@@ -18,15 +18,17 @@ namespace C2C
     {
         protected string Request(HttpContext context) => context.Request.QueryString.ToString().Substring(1);
 
-        protected void CompileCode(string code)
+        protected string CompileCode(string code, string dllName = null)
         {
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(code);
 
-            string assemblyName = Path.GetRandomFileName();
+            string assemblyName = dllName ?? Path.GetRandomFileName();
             MetadataReference[] references = new MetadataReference[]
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location)
+                MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location)
             };
 
             CSharpCompilation compilation = CSharpCompilation.Create(
@@ -34,6 +36,8 @@ namespace C2C
                 syntaxTrees: new[] { syntaxTree },
                 references: references,
                 options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+            Assembly assembly = null;
 
             using (var ms = new MemoryStream())
             {
@@ -48,14 +52,34 @@ namespace C2C
                     foreach (Diagnostic diagnostic in failures)
                     {
                         Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+                        assemblyName = null;
                     }
                 }
                 else
                 {
                     ms.Seek(0, SeekOrigin.Begin);
-                    Assembly assembly = Assembly.Load(ms.ToArray());
+                    assembly = Assembly.Load(ms.ToArray());
                 }
             }
+            var type = assembly?.GetType("Program");
+            type?.InvokeMember("Main", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, null);
+
+            // EmitResult result = compilation.Emit(assemblyName);
+
+            // if (!result.Success)
+            // {
+            //     IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic => 
+            //         diagnostic.IsWarningAsError || 
+            //         diagnostic.Severity == DiagnosticSeverity.Error);
+
+            //     foreach (Diagnostic diagnostic in failures)
+            //     {
+            //         Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+            //         assemblyName = null;
+            //     }
+            // }
+
+            return assemblyName;
         }
 
         protected Process GetProcess(string dllName, string workingDirectory, bool captureConsoleOutput) =>
@@ -65,7 +89,7 @@ namespace C2C
                 {
                     WorkingDirectory = workingDirectory,
                     FileName = "dotnet",
-                    Arguments = $"{dllName}.dll",
+                    Arguments = dllName,
                     UseShellExecute = !captureConsoleOutput,
                     RedirectStandardOutput = captureConsoleOutput,
                     RedirectStandardError = false,
