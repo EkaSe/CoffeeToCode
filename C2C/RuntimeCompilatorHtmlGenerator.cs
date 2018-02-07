@@ -18,18 +18,13 @@ namespace C2C
         {
             var code = ReadFromFile(fileName: Request(context), directoryName: "SourceCode");
 
-            var compiledAssemblyName = CompileCode(code, $"{Request(context)}2018.dll");
-
-            string resultText = "";
+            var resultText = "";
             string contentType = "text/plain";
 
             try 
             {
-                resultText = ReadProcessConsoleOutput(GetProcess(
-                dllName: compiledAssemblyName, 
-                workingDirectory: "",
-                captureConsoleOutput: true));
-
+                resultText = CompileCode(code, $"{Request(context)}.dll");
+                
                 contentType = "text/HTML";
             }
             catch (Exception e)

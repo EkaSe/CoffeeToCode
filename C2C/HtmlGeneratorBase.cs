@@ -62,7 +62,7 @@ namespace C2C
                 }
             }
             var type = assembly?.GetType("Program");
-            type?.InvokeMember("Main", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, null);
+            return type?.InvokeMember("Main", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, null).ToString();
 
             // EmitResult result = compilation.Emit(assemblyName);
 
@@ -78,8 +78,6 @@ namespace C2C
             //         assemblyName = null;
             //     }
             // }
-
-            return assemblyName;
         }
 
         protected Process GetProcess(string dllName, string workingDirectory, bool captureConsoleOutput) =>

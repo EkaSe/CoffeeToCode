@@ -4,7 +4,7 @@ using System.Text;
 
 public class Program
 {
-    public static void Main()
+    public static string Main()
     {
 
         var htmlText = 
@@ -25,5 +25,7 @@ public class Program
             "</body></html>";
 
         Console.WriteLine(htmlText);
+
+        return(htmlText);
     }
 }
