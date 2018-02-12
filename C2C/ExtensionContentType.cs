@@ -5,15 +5,11 @@ namespace C2C
 {
     internal sealed class ExtensionContentType
     {
-        private static Dictionary<string, string> _types;
+        private static Dictionary<string, string> types;
 
-        private static Dictionary<string, string> types 
+        private ExtensionContentType()
         {
-            get 
-            {
-                if (_types is null) 
-                {
-                    _types = new Dictionary<string, string>
+            types = new Dictionary<string, string>
                     {
                             {".html", "text/HTML"},
                             {".css", "text/plain"},
@@ -21,8 +17,19 @@ namespace C2C
                             {".jpeg", "image/JPEG"},
                             {".jpg", "image/JPEG"}
                     };
+        }
+
+        private static ExtensionContentType instance;
+
+        public static ExtensionContentType Instance
+        {
+            get 
+            {
+                if (instance is null) 
+                {
+                    instance = new ExtensionContentType();
                 }
-                return _types;
+                return instance;
             }
         }
        

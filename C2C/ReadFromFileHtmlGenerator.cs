@@ -33,7 +33,7 @@ namespace C2C
             
             var file = new FileInfo($"wwwroot/{requestedFile}");
             
-            var contentType =  new ExtensionContentType()[Path.GetExtension(requestedFile)];
+            var contentType =  ExtensionContentType.Instance[Path.GetExtension(requestedFile)];
 
             byte[] buffer;
             if (file.Exists)

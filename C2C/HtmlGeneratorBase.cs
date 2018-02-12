@@ -16,6 +16,9 @@ namespace C2C
 {
     public abstract class HtmlGeneratorBase
     {
+        ///<summary>
+        ///gets the query string from the context and cuts off the ? sign at the beginning
+        ///</summary>
         protected string Request(HttpContext context) => context.Request.QueryString.ToString().Substring(1);
 
         protected string CompileCode(string code, string dllName = null)

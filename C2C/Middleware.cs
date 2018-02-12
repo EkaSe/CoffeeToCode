@@ -21,9 +21,8 @@ namespace C2C
         private readonly IHtmlGenerator htmlGenerator 
             //= new ReadFromFileHtmlGenerator();
             //= new ConsoleStreamHtmlGenerator(); 
-            = new RuntimeCompilatorHtmlGenerator();   
-
-        private static ExtensionContentType extensionContentTypeMap = new ExtensionContentType();
+            //= new RuntimeCompilatorHtmlGenerator();
+            = new RazorLikeHtmlGenerator();   
 
         public SimpleMiddleware(RequestDelegate next)
         {
