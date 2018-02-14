@@ -1,4 +1,4 @@
-@{var currentDate = DateTime.Now();}
+@{var currentDate = DateTime.Now;}
 <!DOCTYPE>
 <html>
     <head>

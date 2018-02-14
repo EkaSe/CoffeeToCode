@@ -31,7 +31,9 @@ namespace C2C
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location)
+                MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(StringBuilder).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(DateTime).Assembly.Location)
             };
 
             CSharpCompilation compilation = CSharpCompilation.Create(

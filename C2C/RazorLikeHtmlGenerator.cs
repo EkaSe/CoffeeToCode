@@ -12,11 +12,18 @@ namespace C2C
             var resultText = "";
             string contentType = "text/plain";
 
-            var razor = ReadFromFile(fileName: Request(context), directoryName: "RazorPages");
-            var code = ParseRazor(razor);
-
-            
-            
+            try 
+            {
+                var razor = ReadFromFile(fileName: Request(context), directoryName: "RazorPages");
+                var code = ParseRazor(razor);
+                resultText = CompileCode(code);
+                
+                contentType = "text/HTML";
+            }
+            catch (Exception e)
+            {
+                resultText = e.Message;
+            }          
 
             await SendResponse(context, resultText, contentType);
         }
@@ -26,7 +33,13 @@ namespace C2C
         ///</summary>
         private string ParseRazor(string razorSource)
         {
-            StringBuilder code = new StringBuilder("");
+            var outputBufferName = "___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq";
+
+            StringBuilder code = new StringBuilder("using System.Text;\n" +
+                "using System;\n" +
+                "public class Program{\n" +
+                "public static string Main() {\n" +
+                $"var {outputBufferName} = new StringBuilder(\"\");\n");
 
             StringBuilder pureHtmlPart = new StringBuilder("");
 
@@ -34,28 +47,40 @@ namespace C2C
             {
                 if (razorSource[i] == '@' && i < razorSource.Length - 1)
                 {
-                    code.Append($"Console.Write(\"{pureHtmlPart.ToString()}\");/n");
+                    code.Append($"{outputBufferName}.Append(@\"{pureHtmlPart.ToString()}\");\n");
                     pureHtmlPart = new StringBuilder("");
 
                     if (razorSource[i + 1] == '{')
                     {                     
                         var codePartLength = FindClosingParenthesisIndex(razorSource.Substring(i + 1));
-                        code.Append(razorSource.Substring(i + 1, codePartLength));
+                        code.Append(razorSource.Substring(i + 2, codePartLength - 2) + '\n');
                         i += codePartLength;
                     }
                     else
                     {
                         var varName = GetFirstWord(razorSource.Substring(i + 1));
-                        code.Append($"Console.Write({varName});/n");
+                        code.Append($"{outputBufferName}.Append({varName}.ToString());\n");
                         i += varName.Length;
                     }
+                }
+                else if (razorSource[i] == '\n')
+                {
+                    pureHtmlPart.Append("\" + \n \"");
+                }
+                else if (razorSource[i] == '"')
+                {
+                    pureHtmlPart.Append("\\\"");
                 }
                 else
                 {
                     pureHtmlPart.Append(razorSource[i]);
                 }                
             }
-            code.Append(pureHtmlPart);
+            code.Append($"{outputBufferName}.Append(@\"{pureHtmlPart.ToString()}\");\n");
+
+            code.Append($"return {outputBufferName}.ToString();\n" +"}\n}");
+
+            Console.WriteLine(code);
 
             return code.ToString();
         }
