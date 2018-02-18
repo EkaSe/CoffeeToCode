@@ -12,11 +12,21 @@ namespace C2C
             var resultText = "";
             string contentType = "text/plain";
 
+            string fileName = Request(context) ?? context.Request?.Path.ToString();
+            if (fileName == "/")
+            {
+                fileName = "Index";
+            }
+            if (fileName.StartsWith('/') || fileName.StartsWith('?'))
+            {
+                fileName = fileName.Substring(1);
+            }
+
             try 
             {
-                var razor = ReadFromFile(fileName: Request(context), directoryName: "RazorPages");
+                var razor = ReadFromFile(fileName: fileName, directoryName: "RazorPages");
                 var code = ParseRazor(razor);
-                resultText = CompileCode(code);
+                resultText = CompileCode(code, context : context);
                 
                 contentType = "text/HTML";
             }
@@ -37,8 +47,10 @@ namespace C2C
 
             StringBuilder code = new StringBuilder("using System.Text;\n" +
                 "using System;\n" +
+                "using Microsoft.AspNetCore.Http;\n" +
                 "public class Program{\n" +
-                "public static string Main() {\n" +
+                "public static string Main(object args_context) {\n" +
+                "HttpContext _context = args_context as HttpContext;\n" +
                 $"var {outputBufferName} = new StringBuilder(\"\");\n");
 
             StringBuilder pureHtmlPart = new StringBuilder("");

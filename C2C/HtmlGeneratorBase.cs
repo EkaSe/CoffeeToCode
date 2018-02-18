@@ -19,27 +19,49 @@ namespace C2C
         ///<summary>
         ///gets the query string from the context and cuts off the ? sign at the beginning
         ///</summary>
-        protected string Request(HttpContext context) => context.Request.QueryString.ToString().Substring(1);
+        protected string Request(HttpContext context) 
+        {
+            var queryString = context.Request?.QueryString.ToString();
+            if (queryString is null || queryString == "")
+            {
+                return null;
+            }
+            else
+            {
+                return queryString.Substring(1);
+            }
+        }
 
-        protected string CompileCode(string code, string dllName = null)
+        protected string CompileCode(string code, string dllName = null, HttpContext context = null)
         {
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(code);
 
             string assemblyName = dllName ?? Path.GetRandomFileName();
-            MetadataReference[] references = new MetadataReference[]
+
+            var coreDir = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
+
+            List<MetadataReference> references = new List<MetadataReference>
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(StringBuilder).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(DateTime).Assembly.Location)
+                MetadataReference.CreateFromFile(typeof(DateTime).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(HttpContext).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(HttpRequest).Assembly.Location),
+                MetadataReference.CreateFromFile(Path.Combine(coreDir, "mscorlib.dll"))
             };
+
+            foreach (var reference in CollectReferences().ToArray())
+            {  
+                references.Add(reference);
+            }
 
             CSharpCompilation compilation = CSharpCompilation.Create(
                 assemblyName,
                 syntaxTrees: new[] { syntaxTree },
-                references: references,
+                references: references.ToArray(),
                 options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
             Assembly assembly = null;
@@ -67,7 +89,11 @@ namespace C2C
                 }
             }
             var type = assembly?.GetType("Program");
-            return type?.InvokeMember("Main", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, null).ToString();
+
+            object[] args = context is null ? null : new[] {context};
+            return type?.InvokeMember
+                ("Main", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, args)
+                .ToString();
 
             // EmitResult result = compilation.Emit(assemblyName);
 
@@ -152,6 +178,44 @@ namespace C2C
             }
 
             context.Response.ContentLength = buffer.Length;
+        }
+
+        private static List<MetadataReference> CollectReferences()
+        {
+            // first, collect all assemblies
+            var assemblies = new HashSet<Assembly>();
+
+            Collect(Assembly.Load(new AssemblyName("netstandard")));
+
+            //// add extra assemblies which are not part of netstandard.dll, for example:
+            //Collect(typeof(Uri).Assembly);
+
+            // second, build metadata references for these assemblies
+            var result = new List<MetadataReference>(assemblies.Count);
+            foreach (var assembly in assemblies)
+            {
+                result.Add(MetadataReference.CreateFromFile(assembly.Location));
+            }
+
+            return result;
+
+            // helper local function - add assembly and its referenced assemblies
+            void Collect(Assembly assembly)
+            {
+                if (!assemblies.Add(assembly))
+                {
+                    // already added
+                    return;
+                }
+
+                var referencedAssemblyNames = assembly.GetReferencedAssemblies();
+
+                foreach (var assemblyName in referencedAssemblyNames)
+                {
+                    var loadedAssembly = Assembly.Load(assemblyName);
+                    assemblies.Add(loadedAssembly);
+                }
+            }
         }
     }
 }

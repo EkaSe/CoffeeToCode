@@ -1,10 +1,8 @@
-@{var currentDate = DateTime.Now;}
 <!DOCTYPE>
 <html>
     <head>
         <title>Coffee To Code - Login</title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <META http-equiv="refresh" content="0;URL=?Login">
     </head>
     <body>
         <div class="topbar">
@@ -17,5 +15,5 @@
             <input type="password" id="password"><br>
             <input type="submit" value="Login" class="login-submit">
         </form>
-    <div>Requested file is Index.html. @currentDate </div></body>
+    </body>
 </html>

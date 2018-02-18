@@ -1,0 +1,67 @@
+body{
+    font-family: Courier, monospace serif;
+}
+
+.topbar {
+    background-color:#323436;
+    height:35px;
+    margin: -10px;
+    text-align: left;
+}
+
+.topbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    line-height: 35px;
+}
+
+.topbar .C2C-logo {
+    color: #C5FFFA;
+    line-height: 35px;
+    margin-left: 15px;
+    display: inline;
+    font-weight: bold;
+}
+
+.canvas {
+    text-align: center;
+}
+
+.canvas div {
+    margin-top:25px;
+}
+
+#mycanvas {
+    border:1px solid #323436; 
+    margin-top:25px;
+    width: 60%;
+}
+
+.loginform {
+    text-align: center;
+    margin: 25px;
+    line-height: 45px;
+}
+
+.login-submit {
+    margin-top: 15px; 
+    font-family: inherit;
+}
+
+.bottombar {
+    position: fixed;
+    height: 35px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    color: #323436;
+    text-align: center;
+}
+
+.bottombar a {
+    color: #323436;
+    text-decoration: none;
+}
+
