@@ -12,7 +12,7 @@ namespace C2C
             var resultText = "";
             string contentType = "text/plain";
 
-            string fileName = Request(context) ?? context.Request?.Path.ToString();
+            string fileName = context.Request?.Path.ToString();
             if (fileName == "/")
             {
                 fileName = "Index";

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
+using Microsoft.Extensions.Primitives;
 
 namespace C2C
 {
@@ -50,7 +51,10 @@ namespace C2C
                 MetadataReference.CreateFromFile(typeof(DateTime).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(HttpContext).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(HttpRequest).Assembly.Location),
-                MetadataReference.CreateFromFile(Path.Combine(coreDir, "mscorlib.dll"))
+                MetadataReference.CreateFromFile(Path.Combine(coreDir, "mscorlib.dll")),
+                MetadataReference.CreateFromFile(typeof(IQueryCollection).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(StringValues).Assembly.Location)
+
             };
 
             foreach (var reference in CollectReferences().ToArray())

@@ -4,7 +4,7 @@
     <head>
         <title>Coffee To Code - Login</title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <META http-equiv="refresh" content="0;URL=?Login">
+        <META http-equiv="refresh" content="0;URL=Login">
     </head>
     <body>
         <div class="topbar">
@@ -12,9 +12,9 @@
         </div>
         <form action="Canvas" class="loginform">
             <label for "login">Login</label><br>
-            <input type="text" id="login"><br>
+            <input type="text" id="login" name="Login"><br>
             <label for "password">Password</label><br>
-            <input type="password" id="password"><br>
+            <input type="password" id="password" name="pass"><br>
             <input type="submit" value="Login" class="login-submit">
         </form>
     <div>Requested file is Index.html. @currentDate </div></body>

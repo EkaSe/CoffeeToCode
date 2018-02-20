@@ -12,7 +12,7 @@
 <body>
     <div class="topbar">
         <a class="C2C-logo" href="https://github.com/EkaSe/CoffeeToCode/">CoffeeToCode</a>
-        @{string userName = _context.Request.QueryString.ToString();}
+        @{string userName = _context.Request.Query["Login"].ToString();}
         <a href="?Login">Logout</a>
     </div>
     <div class="canvas">
