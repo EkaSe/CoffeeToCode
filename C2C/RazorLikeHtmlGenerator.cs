@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -27,8 +29,9 @@ namespace C2C
                 var razor = ReadFromFile(fileName: fileName, directoryName: "RazorPages");
                 var code = ParseRazor(razor);
                 resultText = CompileCode(code, context : context);
-                
-                contentType = "text/HTML";
+
+                string fileExtension =  fileName.Split(".").LastOrDefault();
+                contentType = context.Request.ContentType ?? ExtensionContentType.Instance[fileExtension];
             }
             catch (Exception e)
             {
@@ -59,7 +62,7 @@ namespace C2C
             {
                 if (razorSource[i] == '@' && i < razorSource.Length - 1)
                 {
-                    code.Append($"{outputBufferName}.Append(@\"{pureHtmlPart.ToString()}\");\n");
+                    code.Append($"{outputBufferName}.Append(\"{pureHtmlPart.ToString()}\");\n");
                     pureHtmlPart = new StringBuilder("");
 
                     if (razorSource[i + 1] == '{')
@@ -88,7 +91,7 @@ namespace C2C
                     pureHtmlPart.Append(razorSource[i]);
                 }                
             }
-            code.Append($"{outputBufferName}.Append(@\"{pureHtmlPart.ToString()}\");\n");
+            code.Append($"{outputBufferName}.Append(\"{pureHtmlPart.ToString()}\");\n");
 
             code.Append($"return {outputBufferName}.ToString();\n" +"}\n}");
 

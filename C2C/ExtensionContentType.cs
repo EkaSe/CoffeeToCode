@@ -12,10 +12,16 @@ namespace C2C
             types = new Dictionary<string, string>
                     {
                             {".html", "text/HTML"},
-                            {".css", "text/plain"},
-                            {".js", "text/plain"},
+                            {".css", "text/css"},
                             {".jpeg", "image/JPEG"},
-                            {".jpg", "image/JPEG"}
+                            {".jpg", "image/JPEG"},
+                            {".js", "application/javascript"},
+                            {"html", "text/HTML"},
+                            {"css", "text/css"},
+                            {"jpeg", "image/JPEG"},
+                            {"jpg", "image/JPEG"},
+                            {"js", "text/javascript"},
+                            {"", "text/HTML"}
                     };
         }
 
@@ -35,6 +41,6 @@ namespace C2C
        
         public string this[string extension] => types.ContainsKey(extension) 
                     ? types[extension]
-                    : "text/plain"; 
+                    : "text/HTML"; 
     }
 }

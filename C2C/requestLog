@@ -1,0 +1,35 @@
+
+Path: /
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/css
+
+Path: /Canvas
+Method: GET
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Canvas.js
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/css
+Status code: 200
+Content type: text/javascript

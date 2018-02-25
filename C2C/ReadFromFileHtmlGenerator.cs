@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace C2C
 {
-    public class ReadFromFileHtmlGenerator : HtmlGeneratorBase
+    public class ReadFromFileHtmlGenerator : HtmlGeneratorBase, IHtmlGenerator
     {
         public async Task ProduceHtml(HttpContext context)
         {

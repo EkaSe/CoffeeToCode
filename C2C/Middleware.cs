@@ -29,7 +29,50 @@ namespace C2C
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context) => await htmlGenerator.ProduceHtml(context);      
+        public async Task Invoke(HttpContext context) 
+        {
+            WriteToFile(context.Request.ToLog());
+            await htmlGenerator.ProduceHtml(context);
+            WriteToFile(context.Response.ToLog());            
+        }
 
+        private static string fileName => "requestLog";
+        
+        private static bool firstTime = true;
+        private static bool appendLog()
+        {
+            if (firstTime)
+            {
+                firstTime = false;
+                return false;
+            }
+            return true;
+        }
+        
+        private static void WriteToFile(string textToWrite)
+        {
+            using (StreamWriter file = new StreamWriter(fileName, appendLog()))
+            {
+                file.Write(textToWrite);
+            }
+        }
+
+    }
+
+    internal static class ContextLogger
+    {
+        public static string ToLog(this HttpRequest request)
+        {
+            return $"\nPath: {request.Path}\n" +
+                $"Method: {request.Method}\n" +
+                $"QueryString: {request.QueryString}\n" +
+                $"ContentType: {request.ContentType}\n";
+        }   
+
+        public static string ToLog (this HttpResponse response)
+        {
+            return $"Status code: {response.StatusCode}\n" +
+                $"Content type: {response.ContentType}\n";
+        } 
     }
 }
