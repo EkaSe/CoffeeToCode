@@ -1,4 +1,4 @@
-        var canvasSetup = document.getElementById("myCanvas");
+        var canvasSetup = document.getElementById("canvas");
         var ctx = canvasSetup.getContext("2d");
 
         ctx.beginPath();

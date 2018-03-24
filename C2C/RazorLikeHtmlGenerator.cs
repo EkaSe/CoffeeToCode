@@ -24,21 +24,31 @@ namespace C2C
                 fileName = fileName.Substring(1);
             }
 
-            try 
+            if (fileName.Split(".").LastOrDefault() == "js")
             {
-                var razor = ReadFromFile(fileName: fileName, directoryName: "RazorPages");
-                var code = ParseRazor(razor);
-                resultText = CompileCode(code, context : context);
-
-                string fileExtension =  fileName.Split(".").LastOrDefault();
-                contentType = context.Request.ContentType ?? ExtensionContentType.Instance[fileExtension];
+                await SendFileAsResponse(
+                    context, 
+                    $"RazorPages/Scripts/{fileName}", 
+                    ExtensionContentType.Instance["js"]);
             }
-            catch (Exception e)
+            else
             {
-                resultText = e.Message;
-            }          
+                try 
+                {
+                    var razor = ReadFromFile(fileName: fileName, directoryName: "RazorPages");
+                    var code = ParseRazor(razor);
+                    resultText = CompileCode(code, context : context);
 
-            await SendResponse(context, resultText, contentType);
+                    string fileExtension =  fileName.Split(".").LastOrDefault();
+                    contentType = context.Request.ContentType ?? ExtensionContentType.Instance[fileExtension];
+                }
+                catch (Exception e)
+                {
+                    resultText = e.Message;
+                }          
+
+                await SendResponse(context, resultText, contentType);
+            }
         }
 
         ///<summary>

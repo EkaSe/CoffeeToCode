@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
+using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Primitives;
 
 namespace C2C
@@ -182,6 +183,22 @@ namespace C2C
             }
 
             context.Response.ContentLength = buffer.Length;
+        }
+
+        protected async Task SendFileAsResponse(HttpContext context, string fileName, string contentType)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+
+            var file = new FileInfo(fileName);
+            
+            if (file.Exists)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.OK;
+
+                context.Response.ContentLength = file.Length;
+
+                await context.Response.SendFileAsync(new PhysicalFileInfo(file));
+            }
         }
 
         private static List<MetadataReference> CollectReferences()

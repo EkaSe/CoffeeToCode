@@ -25,11 +25,18 @@ Method: GET
 QueryString: 
 ContentType: 
 
-Path: /Canvas.js
+Path: /jquery.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Draw.js
 Method: GET
 QueryString: 
 ContentType: 
 Status code: 200
-Content type: text/css
+Content type: 
 Status code: 200
-Content type: text/javascript
+Content type: 
+Status code: 200
+Content type: text/css

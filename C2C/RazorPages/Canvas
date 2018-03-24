@@ -15,14 +15,18 @@
         @{string userName = _context.Request.Query["Login"].ToString();}
         <a href="?Login">Logout</a>
     </div>
-    <div class="canvas">
+    <form class="canvas" method="POST">
         <div>Hello, @userName!</div>
-        <canvas id="myCanvas"></canvas> 
-    </div>
+        <canvas id="canvas"></canvas>
+        <input type="button" value="Clear" id="clear-button">
+        <input type="submit" value="Save" id="save-button">
+        <input type="hidden" name="imageData" id="imageData" />
+    </form>
     <div class="bottombar">
         <a href="https://github.com/EkaSe/CoffeeToCode/">CoffeeToCode</a>
     </div>
-    <script src="Canvas.js" type="text/javascript"></script>
+    <script src="jquery.js"></script>
+    <script language="JavaScript" type="text/javascript" src="Draw.js"></script>
 </body>
 
 </html>
