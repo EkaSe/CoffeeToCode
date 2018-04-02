@@ -13,6 +13,62 @@ ContentType:
 Status code: 200
 Content type: text/css
 
+Path: /favicon.ico
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /favicon.ico
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /Canvas
+Method: GET
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /jquery.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Draw.js
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: text/css
+
+Path: /
+Method: GET
+QueryString: ?Index
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/css
+
 Path: /Canvas
 Method: GET
 QueryString: ?Login=qweqwe&pass=qweqwe
@@ -53,12 +109,12 @@ Method: GET
 QueryString: 
 ContentType: 
 
-Path: /Draw.js
+Path: /jquery.js
 Method: GET
 QueryString: 
 ContentType: 
 
-Path: /jquery.js
+Path: /Draw.js
 Method: GET
 QueryString: 
 ContentType: 
@@ -68,3 +124,80 @@ Status code: 200
 Content type: 
 Status code: 200
 Content type: text/css
+
+Path: /Canvas
+Method: POST
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: application/x-www-form-urlencoded
+Status code: 200
+Content type: application/x-www-form-urlencoded
+
+Path: /Canvas
+Method: GET
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /jquery.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Draw.js
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: text/css
+
+Path: /Canvas
+Method: GET
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /jquery.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Draw.js
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: text/css
+
+Path: /Canvas
+Method: POST
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: application/x-www-form-urlencoded
+Status code: 200
+Content type: application/x-www-form-urlencoded
+
+Path: /Canvas
+Method: POST
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: application/x-www-form-urlencoded
+Status code: 200
+Content type: application/x-www-form-urlencoded
