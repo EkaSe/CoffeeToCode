@@ -1,38 +1,25 @@
 var context = document.getElementById('canvas').getContext("2d");
 var canvas = document.getElementById('canvas');
 
-$('#canvas').mousedown(function(e)
-{        
+$('#canvas').mousedown(function (e)
+{
     paint = true;
 
     var point = getRelativeCoordinates(canvas, e.pageX, e.pageY);
-    //addClick(e.pageX - getGlobalOffset(canvas).left, e.pageY - getGlobalOffset(canvas).top);
+
     addClick(point.x, point.y)
     redraw();
-  });
+});
 
-//   function getGlobalOffset(el) 
-//   {
-//     var x = 0, y = 0;Clienrect
-//     while (el) {
-//         x += el.offsetLeft;
-//         y += el.offsetTop;
-//         el = el.offsetParent;
-//     }
-//     return { left: x, top: y }
-// }
 
 function getRelativeCoordinates(canvas, xGlobal, yGlobal)
 {
     var rect = canvas.getBoundingClientRect();
-    
-    // var xCanvas = (xGlobal - getGlobalOffset(canvas).left) / canvas.scrollWidth;
-    // var yCanvas = (yGlobal - getGlobalOffset(canvas).top) / canvas.scrollHeight;
 
     var xCanvas = (xGlobal - rect.left) / canvas.scrollWidth;
     var yCanvas = (yGlobal - rect.top) / canvas.scrollHeight;
 
-    return {x : xCanvas, y: yCanvas}
+    return { x: xCanvas, y: yCanvas }
 }
 
 function getGlobalCoordinates(canvas, xCanvas, yCanvas)
@@ -42,94 +29,89 @@ function getGlobalCoordinates(canvas, xCanvas, yCanvas)
     var xGlobal = xCanvas * canvas.scrollWidth + rect.left;
     var yGlobal = yCanvas * canvas.scrollHeight + rect.top;
 
-    return {x : xGlobal, y: yGlobal}
+    return { x: xGlobal, y: yGlobal }
 }
 
 function getCoordinates(canvas, xCanvas, yCanvas)
 {
-    var xGlobal = xCanvas * canvas.width;// + getGlobalOffset(canvas).left;
-    var yGlobal = yCanvas * canvas.height;// + getGlobalOffset(canvas).top;
+    var xGlobal = xCanvas * canvas.width;
+    var yGlobal = yCanvas * canvas.height;
 
-    return {x : xGlobal, y: yGlobal}
+    return { x: xGlobal, y: yGlobal }
 }
 
-  $('#canvas').mousemove(function(e){
-    if(paint)
+$('#canvas').mousemove(function (e)
+{
+    if (paint)
     {
-      //addClick(e.pageX - getGlobalOffset(canvas).left, e.pageY - getGlobalOffset(canvas).top, true);
         var point = getRelativeCoordinates(canvas, e.pageX, e.pageY);
 
-      addClick(point.x, point.y, true);
-      redraw();
+        addClick(point.x, point.y, true);
+        redraw();
     }
-  });
+});
 
-  $('#canvas').mouseup(function(e){
+$('#canvas').mouseup(function (e)
+{
     paint = false;
-  });
+});
 
-  $('#canvas').mouseleave(function(e){
+$('#canvas').mouseleave(function (e)
+{
     paint = false;
-  });
+});
 
-  var clickX = new Array();
-  var clickY = new Array();
-  var clickDrag = new Array();
-  var paint;
-  
-  function addClick(x, y, dragging)
-  {
-    clickX.push(x);
-    clickY.push(y);
-    clickDrag.push(dragging);
-  };
+var clicks = new Array();
+var paint;
 
-  function redraw(){
+function addClick(x, y, dragging)
+{
+    clicks.push({x: x, y: y, drag: dragging});
+};
+
+function redraw()
+{
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    
+
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     context.lineWidth = 5;
-              
-    for(var i=0; i < clickX.length; i++) {		
-      context.beginPath();
 
-      var point = getCoordinates(canvas, clickX[i], clickY[i]);
-      var previousPoint = getCoordinates(canvas, clickX[i-1], clickY[i-1]);
+    var previousPoint = undefined;
 
-      if(clickDrag[i] && i)
-      {
-        //context.moveTo(clickX[i-1]*0.6, clickY[i-1]*0.6);
-        context.moveTo(previousPoint.x, previousPoint.y);
-       }
-       else
-       {
-         //context.moveTo(clickX[i]*0.6-0.6, clickY[i]*0.6);
-         var pointI = getCoordinates(canvas, clickX[i], clickY[i])
-         context.moveTo(point.x - 1, point.y);
-       }
-       //context.lineTo(clickX[i]*0.6, clickY[i]*0.6);
-       context.lineTo(point.x, point.y);
+    clicks.forEach(function(click)
+    {
+        context.beginPath();
 
-       context.closePath();
-       context.stroke();
-    }
-  };
+        var point = getCoordinates(canvas, click.x, click.y);
 
-  $('#clear-button').click(function(e) {
+        if (click.drag && previousPoint)
+        {
+            context.moveTo(previousPoint.x, previousPoint.y);
+        }
+        else
+        {
+            context.moveTo(point.x - 1, point.y);
+        }
+        context.lineTo(point.x, point.y);
+
+        context.closePath();
+        context.stroke();
+
+        previousPoint = point;
+    });
+};
+
+$('#clear-button').click(function (e)
+{
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
-    clickX = new Array();
-    clickY = new Array();
-    clickDrag = new Array();
-  });
+    clicks = new Array();
+});
 
-  $('#save-button').click(function(e) 
-  {
-    for (var i = 0; i < clickX.length; i++)
-    {
-        console.log(clickX[i] + ", " + clickY[i] + ", dragging: " + clickDrag[i]);
-    }  
+$('#save-button').click(function (e)
+{
+    console.log(clicks);
 
     // var canvasData = canvas.toDataURL("image/png");
     // $.ajax(  
@@ -141,8 +123,8 @@ function getCoordinates(canvas, xCanvas, yCanvas)
     //         }  
 
     //     }); 
-    
-  });
+
+});
 
 //   function SaveImage() { 
 //     var m = confirm("Are you sure to Save "); 
