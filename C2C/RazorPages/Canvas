@@ -6,6 +6,8 @@
     <title>Coffee To Code</title>
     <meta name="keywords" content="start">
     <meta name="description" content="ASP.NET - let's start">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -15,11 +17,11 @@
         @{string userName = _context.Request.Query["Login"].ToString();}
         <a href="?Login">Logout</a>
     </div>
-    <form class="canvas" method="POST">
+    <form class="canvas" method="POST" accept-charset=utf-8>
         <div>Hello, @userName!</div>
         <canvas id="canvas"></canvas>
         <input type="button" value="Clear" id="clear-button">
-        <input type="submit" value="Save" id="save-button">
+        <input type="button" value="Save" id="save-button">
         <input type="hidden" name="imageData" id="imageData" />
     </form>
     <div class="bottombar">

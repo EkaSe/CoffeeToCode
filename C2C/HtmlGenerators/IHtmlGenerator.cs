@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace C2C
+namespace C2C.HtmlGenerators
 {
     public interface IHtmlGenerator
     {

@@ -13,7 +13,7 @@ namespace C2C
     {
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseMiddleware<SimpleMiddleware>();       
+            app.UseMiddleware<Middleware>();       
 
             app.Run(async (context) =>
             {

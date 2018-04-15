@@ -11,10 +11,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using C2C.Handlers;
+using C2C.HtmlGenerators;
 
 namespace C2C
 {
-    public class SimpleMiddleware
+    public class Middleware
     {
         private readonly RequestDelegate _next;
 
@@ -24,7 +26,7 @@ namespace C2C
             //= new RuntimeCompilatorHtmlGenerator();
             = new RazorLikeHtmlGenerator();   
 
-        public SimpleMiddleware(RequestDelegate next)
+        public Middleware(RequestDelegate next)
         {
             _next = next;
         }

@@ -1,5 +1,6 @@
 var context = document.getElementById('canvas').getContext("2d");
 var canvas = document.getElementById('canvas');
+var clicks = new Array();
 
 $('#canvas').mousedown(function (e)
 {
@@ -61,7 +62,6 @@ $('#canvas').mouseleave(function (e)
     paint = false;
 });
 
-var clicks = new Array();
 var paint;
 
 function addClick(x, y, dragging)
@@ -91,7 +91,7 @@ function redraw()
         }
         else
         {
-            context.moveTo(point.x - 1, point.y);
+            context.moveTo(point.x, point.y);
         }
         context.lineTo(point.x, point.y);
 
@@ -123,8 +123,13 @@ $('#save-button').click(function (e)
     //         }  
 
     //     }); 
-
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/canvas/save", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(clicks)); 
 });
+
+
 
 //   function SaveImage() { 
 //     var m = confirm("Are you sure to Save "); 

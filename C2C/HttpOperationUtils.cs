@@ -11,30 +11,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Primitives;
 
 namespace C2C
 {
-    public abstract class HtmlGeneratorBase
+    public static class HttpOperationUtils
     {
-        ///<summary>
-        ///gets the query string from the context and cuts off the ? sign at the beginning
-        ///</summary>
-        protected string Request(HttpContext context) 
-        {
-            var queryString = context.Request?.QueryString.ToString();
-            if (queryString is null || queryString == "")
+        public static Process GetProcess(string dllName, string workingDirectory, bool captureConsoleOutput) =>
+            new Process
             {
-                return null;
-            }
-            else
-            {
-                return queryString.Substring(1);
-            }
-        }
-
-        protected string CompileCode(string code, string dllName = null, HttpContext context = null)
+                StartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory = workingDirectory,
+                    FileName = "dotnet",
+                    Arguments = dllName,
+                    UseShellExecute = !captureConsoleOutput,
+                    RedirectStandardOutput = captureConsoleOutput,
+                    RedirectStandardError = false,
+                    CreateNoWindow = true
+                }
+            };
+        
+        public static string CompileCode(string code, string dllName = null, HttpContext context = null)
         {
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(code);
 
@@ -99,39 +97,9 @@ namespace C2C
             return type?.InvokeMember
                 ("Main", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, args)
                 .ToString();
-
-            // EmitResult result = compilation.Emit(assemblyName);
-
-            // if (!result.Success)
-            // {
-            //     IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic => 
-            //         diagnostic.IsWarningAsError || 
-            //         diagnostic.Severity == DiagnosticSeverity.Error);
-
-            //     foreach (Diagnostic diagnostic in failures)
-            //     {
-            //         Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
-            //         assemblyName = null;
-            //     }
-            // }
         }
 
-        protected Process GetProcess(string dllName, string workingDirectory, bool captureConsoleOutput) =>
-            new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    WorkingDirectory = workingDirectory,
-                    FileName = "dotnet",
-                    Arguments = dllName,
-                    UseShellExecute = !captureConsoleOutput,
-                    RedirectStandardOutput = captureConsoleOutput,
-                    RedirectStandardError = false,
-                    CreateNoWindow = true
-                }
-            };
-
-        protected string ReadFromFile(string fileName, string directoryName)
+        public static string ReadFromFile(string fileName, string directoryName)
         {
             string code = "";
 
@@ -149,7 +117,7 @@ namespace C2C
             return code;
         }
 
-        protected string ReadProcessConsoleOutput(Process process)
+        public static string ReadProcessConsoleOutput(Process process)
         {
             process.Start();
 
@@ -161,14 +129,14 @@ namespace C2C
             return result;
         }
 
-        protected void RunProcess(Process process)
+        public static void RunProcess(Process process)
         {
             process.Start();
             process.WaitForExit();
             process.Close();
         }
 
-        protected async Task SendResponse(HttpContext context, string responseText, string contentType)
+        public static async Task SendResponse(HttpContext context, string responseText, string contentType)
         {
             context.Response.ContentType = contentType;
 
@@ -183,22 +151,6 @@ namespace C2C
             }
 
             context.Response.ContentLength = buffer.Length;
-        }
-
-        protected async Task SendFileAsResponse(HttpContext context, string fileName, string contentType)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-
-            var file = new FileInfo(fileName);
-            
-            if (file.Exists)
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.OK;
-
-                context.Response.ContentLength = file.Length;
-
-                await context.Response.SendFileAsync(new PhysicalFileInfo(file));
-            }
         }
 
         private static List<MetadataReference> CollectReferences()

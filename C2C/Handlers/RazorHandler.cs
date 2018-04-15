@@ -1,55 +1,49 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace C2C
+namespace C2C.Handlers
 {
-    public class RazorLikeHtmlGenerator : HtmlGeneratorBase, IHtmlGenerator
+    public class RazorHandler : RequestHandlerBase
     {
-        public async Task ProduceHtml(HttpContext context)
+        protected override string route => "";
+
+        protected override string method => "GET";
+
+        public override bool CheckRequest(HttpContext context) =>
+            context.Request?.Method.ToUpper() == this.method.ToUpper();
+
+        protected override async Task Execute(HttpContext context)
         {
             var resultText = "";
             string contentType = "text/plain";
 
             string fileName = context.Request?.Path.ToString();
-            if (fileName == "/")
-            {
-                fileName = "Index";
-            }
+
             if (fileName.StartsWith('/') || fileName.StartsWith('?'))
             {
                 fileName = fileName.Substring(1);
             }
 
-            if (fileName.Split(".").LastOrDefault() == "js")
+            try 
             {
-                await SendFileAsResponse(
-                    context, 
-                    $"RazorPages/Scripts/{fileName}", 
-                    ExtensionContentType.Instance["js"]);
+                var razor = HttpOperationUtils.ReadFromFile(fileName: fileName, directoryName: "RazorPages");
+                var code = ParseRazor(razor);
+                resultText = HttpOperationUtils.CompileCode(code, context : context);
+
+                string fileExtension =  fileName.Split(".").LastOrDefault();
+                contentType = context.Request.ContentType ?? ExtensionContentType.Instance[fileExtension];
             }
-            else
+            catch (Exception e)
             {
-                try 
-                {
-                    var razor = ReadFromFile(fileName: fileName, directoryName: "RazorPages");
-                    var code = ParseRazor(razor);
-                    resultText = CompileCode(code, context : context);
+                resultText = e.Message;
+            }          
 
-                    string fileExtension =  fileName.Split(".").LastOrDefault();
-                    contentType = context.Request.ContentType ?? ExtensionContentType.Instance[fileExtension];
-                }
-                catch (Exception e)
-                {
-                    resultText = e.Message;
-                }          
-
-                await SendResponse(context, resultText, contentType);
-            }
+            await HttpOperationUtils.SendResponse(context, resultText, contentType);
         }
+
 
         ///<summary>
         ///converts razor syntax to the code to be invoked
@@ -158,6 +152,5 @@ namespace C2C
             || IsDigit(symbol) && !isFirstChar;
 
         private bool IsDigit(char symbol) => (int) symbol >= (int) '0' && (int) symbol <= (int) '9';
-        
     }
 }

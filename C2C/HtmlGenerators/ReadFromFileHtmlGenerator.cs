@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace C2C
+namespace C2C.HtmlGenerators
 {
-    public class ReadFromFileHtmlGenerator : HtmlGeneratorBase, IHtmlGenerator
+    public class ReadFromFileHtmlGenerator : IHtmlGenerator
     {
         public async Task ProduceHtml(HttpContext context)
         {

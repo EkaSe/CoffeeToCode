@@ -10,20 +10,22 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
 
-namespace C2C
+namespace C2C.HtmlGenerators
 {
-    public class RuntimeCompilatorHtmlGenerator : HtmlGeneratorBase, IHtmlGenerator
+    public class RuntimeCompilatorHtmlGenerator : IHtmlGenerator
     {
         public async Task ProduceHtml(HttpContext context)
         {
-            var code = ReadFromFile(fileName: Request(context), directoryName: "SourceCode");
+            var request = context.Request?.QueryString.ToString()?.Substring(1);
+
+            var code = HttpOperationUtils.ReadFromFile(fileName: request, directoryName: "SourceCode");
 
             var resultText = "";
             string contentType = "text/plain";
 
             try 
             {
-                resultText = CompileCode(code, $"{Request(context)}.dll");
+                resultText = HttpOperationUtils.CompileCode(code, $"{request}.dll");
                 
                 contentType = "text/HTML";
             }
@@ -32,7 +34,7 @@ namespace C2C
                 resultText = e.Message;
             }
 
-            await SendResponse(context, resultText, contentType);
+            await HttpOperationUtils.SendResponse(context, resultText, contentType);
         }
     }
 }
