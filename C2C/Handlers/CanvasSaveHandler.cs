@@ -20,7 +20,7 @@ namespace C2C.Handlers
                 clicks = requestReader.ReadToEnd();
             }
 
-            string path = $"Data/clicks{DateTime.Now.ToString("s")}";
+            string path = $"Data/clicks{DateTime.Now.ToString("s")}.json";
             
             using (StreamWriter file = new StreamWriter(path, false))
             {

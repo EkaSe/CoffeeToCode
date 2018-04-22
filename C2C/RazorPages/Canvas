@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
+<body onload="getSavedData()">
     <div class="topbar">
         <a class="C2C-logo" href="https://github.com/EkaSe/CoffeeToCode/">CoffeeToCode</a>
         @{string userName = _context.Request.Query["Login"].ToString();}

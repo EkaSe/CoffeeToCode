@@ -13,10 +13,13 @@ namespace C2C.HtmlGenerators
         public RazorLikeHtmlGenerator()
         {
             HandlerRegistrar.Register<EmptyHandler>();
-            HandlerRegistrar.Register<JsHandler>();
             HandlerRegistrar.Register<CanvasSaveHandler>();
+            HandlerRegistrar.Register<SavedDataHandler>();
+
+            HandlerRegistrar.Register<RazorJsHandler>();
 
             //default:
+            HandlerRegistrar.Register<JsHandler>();
             HandlerRegistrar.Register<RazorHandler>();
         }
 

@@ -18,14 +18,14 @@ namespace C2C.HtmlGenerators
         {
             var request = context.Request?.QueryString.ToString()?.Substring(1);
 
-            var code = HttpOperationUtils.ReadFromFile(fileName: request, directoryName: "SourceCode");
+            var code = Utils.ReadFromFile(fileName: request, directoryName: "SourceCode");
 
             var resultText = "";
             string contentType = "text/plain";
 
             try 
             {
-                resultText = HttpOperationUtils.CompileCode(code, $"{request}.dll");
+                resultText = Utils.CompileCode(code, $"{request}.dll");
                 
                 contentType = "text/HTML";
             }
@@ -34,7 +34,7 @@ namespace C2C.HtmlGenerators
                 resultText = e.Message;
             }
 
-            await HttpOperationUtils.SendResponse(context, resultText, contentType);
+            await Utils.SendResponse(context, resultText, contentType);
         }
     }
 }

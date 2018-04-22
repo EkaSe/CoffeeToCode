@@ -17,8 +17,8 @@ namespace C2C.HtmlGenerators
 
             try 
             {
-                resultText = HttpOperationUtils.ReadProcessConsoleOutput(
-                    HttpOperationUtils.GetProcess(
+                resultText = Utils.ReadProcessConsoleOutput(
+                    Utils.GetProcess(
                         dllName: request, 
                         workingDirectory: "HtmlStream", 
                         captureConsoleOutput: true));            
@@ -29,7 +29,7 @@ namespace C2C.HtmlGenerators
                 resultText = e.Message;
             }
 
-            await HttpOperationUtils.SendResponse(context, resultText, contentType);
+            await Utils.SendResponse(context, resultText, contentType);
         }
     }
 }

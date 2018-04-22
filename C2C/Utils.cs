@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -15,7 +15,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace C2C
 {
-    public static class HttpOperationUtils
+    public static class Utils
     {
         public static Process GetProcess(string dllName, string workingDirectory, bool captureConsoleOutput) =>
             new Process
@@ -188,6 +188,14 @@ namespace C2C
                     var loadedAssembly = Assembly.Load(assemblyName);
                     assemblies.Add(loadedAssembly);
                 }
+            }
+        }
+
+        public static void WriteToFile(string textToWrite, string fileName, bool append)
+        {
+            using (StreamWriter file = new StreamWriter(fileName, append))
+            {
+                file.Write(textToWrite);
             }
         }
     }

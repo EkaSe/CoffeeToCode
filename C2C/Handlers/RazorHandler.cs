@@ -12,6 +12,8 @@ namespace C2C.Handlers
 
         protected override string method => "GET";
 
+        protected virtual bool CheckForJsComments => false;
+
         public override bool CheckRequest(HttpContext context) =>
             context.Request?.Method.ToUpper() == this.method.ToUpper();
 
@@ -29,9 +31,10 @@ namespace C2C.Handlers
 
             try 
             {
-                var razor = HttpOperationUtils.ReadFromFile(fileName: fileName, directoryName: "RazorPages");
+                var razor = Utils.ReadFromFile(fileName: fileName, directoryName: "RazorPages");
+                Log(fileName);
                 var code = ParseRazor(razor);
-                resultText = HttpOperationUtils.CompileCode(code, context : context);
+                resultText = Utils.CompileCode(code, context : context);
 
                 string fileExtension =  fileName.Split(".").LastOrDefault();
                 contentType = context.Request.ContentType ?? ExtensionContentType.Instance[fileExtension];
@@ -41,14 +44,14 @@ namespace C2C.Handlers
                 resultText = e.Message;
             }          
 
-            await HttpOperationUtils.SendResponse(context, resultText, contentType);
+            await Utils.SendResponse(context, resultText, contentType);
         }
 
 
         ///<summary>
         ///converts razor syntax to the code to be invoked
         ///</summary>
-        private string ParseRazor(string razorSource)
+        protected string ParseRazor(string razorSource)
         {
             var outputBufferName = "___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq";
 
@@ -82,6 +85,15 @@ namespace C2C.Handlers
                         i += varName.Length;
                     }
                 }
+                else if (this.CheckForJsComments &&
+                    razorSource[i] == '/' && i < razorSource.Length - 1 && razorSource[i + 1] == '/')
+                {
+                    i = razorSource.IndexOf('\n', i);
+                    if (i == -1)
+                    {
+                        i = razorSource.Length;
+                    }
+                }
                 else if (razorSource[i] == '\n')
                 {
                     pureHtmlPart.Append("\" + \n \"");
@@ -99,7 +111,9 @@ namespace C2C.Handlers
 
             code.Append($"return {outputBufferName}.ToString();\n" +"}\n}");
 
-            Console.WriteLine(code);
+            //Console.WriteLine(code);
+
+            Log(code.ToString());
 
             return code.ToString();
         }
@@ -152,5 +166,24 @@ namespace C2C.Handlers
             || IsDigit(symbol) && !isFirstChar;
 
         private bool IsDigit(char symbol) => (int) symbol >= (int) '0' && (int) symbol <= (int) '9';
+        
+
+        private readonly string logName = "generatedCode.cs";
+        private static bool firstTime = true;
+        private static bool appendLog()
+        {
+            if (firstTime)
+            {
+                firstTime = false;
+                return false;
+            }
+            return true;
+        }
+
+        private void Log(string text)
+        {
+            text = text.Replace("\n", "\n//");
+            Utils.WriteToFile($"//{text}\n\n", logName, appendLog());
+        }
     }
 }

@@ -33,9 +33,9 @@ namespace C2C
 
         public async Task Invoke(HttpContext context) 
         {
-            WriteToFile(context.Request.ToLog());
+            Utils.WriteToFile(context.Request.ToLog(), fileName, appendLog());
             await htmlGenerator.ProduceHtml(context);
-            WriteToFile(context.Response.ToLog());            
+            Utils.WriteToFile(context.Response.ToLog(), fileName, appendLog());            
         }
 
         private static string fileName => "requestLog";
@@ -50,15 +50,6 @@ namespace C2C
             }
             return true;
         }
-        
-        private static void WriteToFile(string textToWrite)
-        {
-            using (StreamWriter file = new StreamWriter(fileName, appendLog()))
-            {
-                file.Write(textToWrite);
-            }
-        }
-
     }
 
     internal static class ContextLogger

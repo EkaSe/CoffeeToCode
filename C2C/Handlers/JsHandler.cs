@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,7 +18,7 @@ namespace C2C.Handlers
         {
             string fileName = context.Request?.Path.ToString();
 
-            return fileName.Split(".").LastOrDefault() == "js";
+            return fileName.EndsWith("js");
         }
 
         protected override async Task Execute(HttpContext context)
@@ -27,23 +28,26 @@ namespace C2C.Handlers
                     context, 
                     $"RazorPages/Scripts/{fileName}", 
                     ExtensionContentType.Instance["js"]);
+
+
+            // var resultText = "";
+            // string contentType = ExtensionContentType.Instance[".js"];
+
+            // string fileName = context.Request?.Path.ToString();
+
+            // try 
+            // {
+            //     var razor = HttpOperationUtils.ReadFromFile(fileName: fileName, directoryName: "RazorPages/Scripts");
+            //     var code = ParseRazor(razor);
+            //     resultText = HttpOperationUtils.CompileCode(code, context : context);
+            // }
+            // catch (Exception e)
+            // {
+            //     resultText = e.Message;
+            //     contentType = ExtensionContentType.Instance[""];
+            // }          
+
+            // await HttpOperationUtils.SendResponse(context, resultText, contentType);
         }
-
-        private async Task SendFileAsResponse(HttpContext context, string fileName, string contentType)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-
-            var file = new FileInfo(fileName);
-            
-            if (file.Exists)
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.OK;
-
-                context.Response.ContentLength = file.Length;
-
-                await context.Response.SendFileAsync(new PhysicalFileInfo(file));
-            }
-        }
-
     }
 }
