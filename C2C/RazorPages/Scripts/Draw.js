@@ -2,19 +2,16 @@ var context = document.getElementById('canvas').getContext("2d");
 var canvas = document.getElementById('canvas');
 var clicks = new Array();
 
-var savedData = $.getJSON("/savedData");
-// function checkSavedData() 
-// {
-//     savedData = $.getJSON("/savedData");
-// }
-
 document.body.onload = function (e)
 {
-    savedData = $.getJSON("/savedData");
-    clicks = JSON.parse(savedData.responseJSON);
-    redraw();
+    savedData = $.getJSON(
+        "/savedData",
+        function (data)
+        {
+            clicks = data;
+            redraw();
+        });
 };
-
 
 $('#canvas').mousedown(function (e)
 {
@@ -127,39 +124,8 @@ $('#save-button').click(function (e)
 {
     console.log(clicks);
 
-    // var canvasData = canvas.toDataURL("image/png");
-    // $.ajax(  
-    //     {  
-    //         type: "POST", 
-    //         url: "Canvas/SaveCanvas",   
-    //         data: {   
-    //             image: canvasData
-    //         }  
-
-    //     }); 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/canvas/save", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(clicks)); 
 });
-
-
-
-//   function SaveImage() { 
-//     var m = confirm("Are you sure to Save "); 
-//     if (m) { 
-//         // generate the image data 
-//         var image_NEW = document.getElementById("canvas").toDataURL("image/png"); 
-//         image_NEW = image_NEW.replace('data:image/png;base64,', '');
-//         $.ajax({
-//             type: 'POST',
-//             url: 'Default.aspx/SaveImage',
-//             data: '{ "imageData" : "' + image_NEW + '" }',
-//             contentType: 'application/json; charset=utf-8',
-//             dataType: 'json',
-//             success: function (msg) {
-//                 alert('Image saved to your root Folder !');
-//             }
-//         });
-//     }      
-//}

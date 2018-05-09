@@ -32,12 +32,12 @@ Method: GET
 QueryString: 
 ContentType: 
 
-Path: /jquery.js
+Path: /Draw.js
 Method: GET
 QueryString: 
 ContentType: 
 
-Path: /Draw.js
+Path: /jquery.js
 Method: GET
 QueryString: 
 ContentType: 
@@ -65,7 +65,7 @@ ContentType:
 Status code: 200
 Content type: text/HTML
 
-Path: /style.css
+Path: /jquery.js
 Method: GET
 QueryString: 
 ContentType: 
@@ -75,44 +75,18 @@ Method: GET
 QueryString: 
 ContentType: 
 
-Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: text/css
-
-Path: /savedData
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /savedData
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /
-Method: GET
-QueryString: ?Index
-ContentType: 
-Status code: 302
-Content type: 
-
-Path: /Index
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
 Path: /style.css
 Method: GET
 QueryString: 
 ContentType: 
 Status code: 200
+Content type: 
+Status code: 200
+Content type: 
+Status code: 200
 Content type: text/css
+
+Path: /savedData
+Method: GET
+QueryString: 
+ContentType: 
