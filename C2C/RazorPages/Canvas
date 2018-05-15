@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body onload="getSavedData()">
+<body>
     <div class="topbar">
         <a class="C2C-logo" href="https://github.com/EkaSe/CoffeeToCode/">CoffeeToCode</a>
         @{string userName = _context.Request.Query["Login"].ToString();}
@@ -28,7 +28,7 @@
         <a href="https://github.com/EkaSe/CoffeeToCode/">CoffeeToCode</a>
     </div>
     <script src="jquery.js"></script>
-    <script language="JavaScript" type="text/javascript" src="Draw.js"></script>
+    <script language="JavaScript" type="text/javascript" src="CanvasFronted.js"></script>
 </body>
 
 </html>

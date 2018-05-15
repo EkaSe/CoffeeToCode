@@ -4,7 +4,7 @@ var clicks = new Array();
 
 document.body.onload = function (e)
 {
-    savedData = $.getJSON(
+    $.getJSON(
         "/savedData",
         function (data)
         {
@@ -77,7 +77,7 @@ var paint;
 
 function addClick(x, y, dragging)
 {
-    clicks.push({x: x, y: y, drag: dragging});
+    clicks.push({ x: x, y: y, drag: dragging });
 };
 
 function redraw()
@@ -90,7 +90,7 @@ function redraw()
 
     var previousPoint = undefined;
 
-    clicks.forEach(function(click)
+    clicks.forEach(function (click)
     {
         context.beginPath();
 
@@ -127,5 +127,5 @@ $('#save-button').click(function (e)
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/canvas/save", true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(clicks)); 
+    xhttp.send(JSON.stringify(clicks));
 });
