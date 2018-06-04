@@ -1,191 +1,196 @@
-var CanvasView = 
+function CanvasView () 
 {
-    documentBody: document.body,
-    context: document.getElementById('canvas').getContext("2d"),
-    canvas: document.getElementById('canvas'),
-    clearButton: document.getElementById('clear-button'),
-    saveButton: document.getElementById('save-button'),
+    this.documentBody = document.body;
+    this.context = document.getElementById('canvas').getContext("2d");
+    this.canvas = document.getElementById('canvas');
+    this.clearButton = document.getElementById('clear-button');
+    this.saveButton = document.getElementById('save-button');
+    
+    var self = this;
 
-    clearRect() 
+    this.clearRect = function() 
     {
-        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    },
+        this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    };
 
-    setLineStyle(strokeStyle, loneJoin, lineWidth)
+    this.setLineStyle = function(strokeStyle, lineJoin, lineWidth)
     {
-        context.strokeStyle = strokeStyle;
-        context.lineJoin = lineJoin;
-        context.lineWidth = lineWidth;
-    },
+        this.context.strokeStyle = strokeStyle;
+        this.context.lineJoin = lineJoin;
+        this.context.lineWidth = lineWidth;
+    };
 
-    beginPath()
+    this.beginPath = function() 
     {
         this.context.beginPath();
-    },
+    };
 
-    closePath()
+    this.closePath = function()
     {
         this.context.closePath();
-    },
+    };
 
-    stroke()
+    this.stroke = function()
     {
         this.context.stroke();
-    },
+    };
 
-    moveTo(x, y)
+    this.moveTo = function(x, y)
     {
         this.context.moveTo(x, y);
-    },
+    };
 
-    lineTo(x, y)
+    this.lineTo = function(x, y)
     {
         this.context.lineTo(x, y);
-    },
+    };
 
+    this.canvasMousedownEvent = function(e) {console.log("mouse down")};
+    this.canvasMousemoveEvent = function(e) {};
+    this.canvasMouseleaveEvent = function(e) {};
+    this.canvasMouseupEvent = function(e) {};
 
-    getRelativeCoordinates(e)
+    $(this.canvas).mousedown(e => this.canvasMousedownEvent(e));
+
+    $(this.canvas).mousemove(e => this.canvasMousemoveEvent(e));
+
+    $(this.canvas).mouseleave(e => this.canvasMouseleaveEvent(e));
+
+    $(this.canvas).mouseup(e => this.canvasMouseupEvent(e));
+
+    this.getRelativeCoordinates = function(e)
     {
-        var rect = canvas.getBoundingClientRect();
+        var rect = this.canvas.getBoundingClientRect();
 
-        var xCanvas = (e.pageX - rect.left) / canvas.scrollWidth;
-        var yCanvas = (e.pageY - rect.top) / canvas.scrollHeight;
+        var xCanvas = (e.pageX - rect.left) / this.canvas.scrollWidth;
+        var yCanvas = (e.pageY - rect.top) / this.canvas.scrollHeight;
 
         return { x: xCanvas, y: yCanvas };
-    },
+    };
 
-    getCoordinates(clickX, clickY)
+    this.getCoordinates = function(clickX, clickY)
     {
-        var xGlobal = clickX * canvas.width;
-        var yGlobal = clickY * canvas.height;
+        var xGlobal = clickX * this.canvas.width;
+        var yGlobal = clickY * this.canvas.height;
 
         return { x: xGlobal, y: yGlobal };
-    }
+    };
 };
 
-var CanvasModel = {
-    getSavedData: function(onSuccessFunction){
+function CanvasModel() 
+{
+    this.getSavedData = function(onSuccessFunction){
         $.getJSON(
             "/savedData",
             onSuccessFunction);
-    },
+    };
 
-    saveCanvasData(clicks)
+    this.saveCanvasData = function(clicks)
     {
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "/canvas/save", true);
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send(JSON.stringify(clicks));
-    } 
-}
+    }; 
+};
 
-var CanvasController = {
-    clicks: new Array(),
-    paint: false,
+function CanvasController(canvasView, canvasModel) {
+    this.clicks = new Array();
+    this.paint = false;
 
-    redraw()
+    this.redraw = () =>
     {
-        CanvasView.clearRect();
-        CanvasView.setLineStyle("#df4b26", "round", 5);
+        canvasView.clearRect();
+        canvasView.setLineStyle("#df4b26", "round", 5);
 
         var previousPoint = undefined;
 
-        clicks.forEach(function (click)
+        this.clicks.forEach(function (click)
         {
-            CanvasView.beginPath();
+            canvasView.beginPath();
 
-            var point = CanvasView.getCoordinates(click.x, click.y);
+            var point = canvasView.getCoordinates(click.x, click.y);
 
             if (click.drag && previousPoint)
             {
-                CanvasView.moveTo(previousPoint.x, previousPoint.y);
+                canvasView.moveTo(previousPoint.x, previousPoint.y);
             }
             else
             {
-                CanvasView.moveTo(point.x, point.y);
+                canvasView.moveTo(point.x, point.y);
             }
-            CanvasView.lineTo(point.x, point.y);
+            canvasView.lineTo(point.x, point.y);
 
-            CanvasView.closePath();
-            CanvasView.stroke();
+            canvasView.closePath();
+            canvasView.stroke();
 
             previousPoint = point;
         });
-    },
+    };
     
-    documentBodyOnload(e)
+    this.documentBodyOnload = function(e)
     {
-        CanvasModel.getSavedData(
+        var self = this;
+
+        canvasModel.getSavedData(
             function (data)
             {
-                clicks = data;
-                CanvasController.redraw();
+                self.clicks = data;
+                self.redraw();
             });
-    },
+    };
 
-    canvasMousedown(e)
+    this.addClick = (x, y, dragging) =>
     {
-        paint = true;
+        this.clicks.push({ x: x, y: y, drag: dragging });
+    };    
 
-        var point = CanvasView.getRelativeCoordinates(e);
-
-        addClick(point.x, point.y);
-
-        redraw();
-    },
-
-    canvasMousemove(e)
+    this.clearOnSuccess = e =>
     {
-        if (paint)
+        canvasView.clearRect();
+
+        this.clicks = new Array();
+    };
+
+    this.saveOnSuccess = e =>
+    {
+        canvasModel.saveCanvasData(clicks);
+    };
+
+    canvasView.canvasMousedownEvent = e =>
+    {       
+        this.paint = true;
+
+        var point = canvasView.getRelativeCoordinates(e);
+
+        this.addClick(point.x, point.y);
+
+        this.redraw();
+    };
+
+    canvasView.canvasMouseleaveEvent = e => { this.paint = false; };
+
+    canvasView.canvasMousemoveEvent = e => 
+    {
+        if (this.paint)
         {
-            var point = CanvasView.getRelativeCoordinates(e);
+            var point = canvasView.getRelativeCoordinates(e);
 
-            addClick(point.x, point.y, true);
+            this.addClick(point.x, point.y, true);
 
-            redraw();
+            this.redraw();
         }
-    },
-
-    canvasMouseup(e)
-    {
-        paint = false;
-    },
-
-    canvasMouseleave(e)
-    {
-        paint = false;
-    },
-
-    addClick(x, y, dragging)
-    {
-        clicks.push({ x: x, y: y, drag: dragging });
-    },    
-
-    clearOnSuccess(e)
-    {
-        CanvasView.clearRect();
-
-        clicks = new Array();
-    },
-
-    saveOnSuccess(e)
-    {
-        CanvasModel.saveCanvasData(clicks);
-    }
-
+    };
+    canvasView.canvasMouseupEvent = e => { this.paint = false; };
 }
 
+var canvasView = new CanvasView();
+var canvasModel = new CanvasModel();
+var canvasController = new CanvasController(canvasView, canvasModel);
 
-CanvasView.documentBody.onload = function(e) {CanvasController.documentBodyOnload(e);}
 
-CanvasView.canvas.mousedown = function(e) {CanvasController.canvasMousedown(e);}
+canvasView.documentBody.onload = function(e) {canvasController.documentBodyOnload(e);};
 
-CanvasView.canvas.mousemove = function(e) {CanvasController.canvasMousemove(e);}
+$(canvasView.clearButton).click(function(e) {canvasController.clearOnSuccess(e)});
 
-CanvasView.canvas.mouseup = function(e) {CanvasController.canvasMouseup(e);}
-
-CanvasView.canvas.mouseleave = function(e) {CanvasController.canvasMouseleave(e);}
-
-CanvasView.clearButton.click(function(e) {CanvasController.clearOnSuccess(e)});
-
-CanvasView.saveButton.click(function(e) {CanvasController.saveOnSuccess(e)});
+$(canvasView.saveButton).click(function(e) {canvasController.saveOnSuccess(e)});

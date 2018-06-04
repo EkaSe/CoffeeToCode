@@ -20,20 +20,6 @@ ContentType:
 Status code: 200
 Content type: text/css
 
-Path: /favicon.ico
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /favicon.ico
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
 Path: /Canvas
 Method: GET
 QueryString: ?Login=qweqwe&pass=qweqwe
@@ -47,169 +33,6 @@ QueryString:
 ContentType: 
 
 Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /CanvasFronted.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: text/css
-Status code: 200
-Content type: 
-Status code: 200
-Content type: 
-
-Path: /Canvas
-Method: GET
-QueryString: ?Login=qweqwe&pass=qweqwe
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /style.css
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /CanvasFronted.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: text/css
-
-Path: /Canvas
-Method: GET
-QueryString: ?Login=qweqwe&pass=qweqwe
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /style.css
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /CanvasFronted.js
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: text/css
-
-Path: /Canvas
-Method: GET
-QueryString: ?Login=qweqwe&pass=qweqwe
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /style.css
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /CanvasFronted.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: text/css
-Status code: 200
-Content type: 
-
-Path: /Canvas
-Method: GET
-QueryString: ?Login=qweqwe&pass=qweqwe
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /style.css
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /CanvasFronted.js
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: text/css
-
-Path: /Canvas
-Method: GET
-QueryString: ?Login=qweqwe&pass=qweqwe
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /style.css
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /CanvasFronted.js
-Method: GET
-QueryString: 
-ContentType: 
-
-Path: /jquery.js
-Method: GET
-QueryString: 
-ContentType: 
-Status code: 200
-Content type: 
-Status code: 200
-Content type: text/css
-Status code: 200
-Content type: 
-
-Path: /Canvas
-Method: GET
-QueryString: ?Login=qweqwe&pass=qweqwe
-ContentType: 
-Status code: 200
-Content type: text/HTML
-
-Path: /style.css
 Method: GET
 QueryString: 
 ContentType: 
@@ -248,6 +71,72 @@ QueryString:
 ContentType: 
 
 Path: /CanvasFronted.js
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: text/css
+
+Path: /savedData
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Canvas
+Method: GET
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /jquery.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /CanvasFronted.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: 
+Status code: 200
+Content type: text/css
+
+Path: /savedData
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /Canvas
+Method: GET
+QueryString: ?Login=qweqwe&pass=qweqwe
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
+Path: /style.css
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /CanvasFronted.js
+Method: GET
+QueryString: 
+ContentType: 
+
+Path: /jquery.js
 Method: GET
 QueryString: 
 ContentType: 
