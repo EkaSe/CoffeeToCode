@@ -154,7 +154,7 @@ function CanvasController(canvasView, canvasModel) {
 
     this.saveOnSuccess = e =>
     {
-        canvasModel.saveCanvasData(clicks);
+        canvasModel.saveCanvasData(this.clicks);
     };
 
     canvasView.canvasMousedownEvent = e =>
