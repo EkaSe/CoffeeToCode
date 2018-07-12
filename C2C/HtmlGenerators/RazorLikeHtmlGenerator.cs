@@ -15,12 +15,14 @@ namespace C2C.HtmlGenerators
             HandlerRegistrar.Register<EmptyHandler>();
             HandlerRegistrar.Register<CanvasSaveHandler>();
             HandlerRegistrar.Register<SavedDataHandler>();
+            HandlerRegistrar.Register<ImagesListHandler>();
 
             HandlerRegistrar.Register<RazorJsHandler>();
 
             //default:
             HandlerRegistrar.Register<JsHandler>();
             HandlerRegistrar.Register<RazorHandler>();
+
         }
 
         public async Task ProduceHtml(HttpContext context)

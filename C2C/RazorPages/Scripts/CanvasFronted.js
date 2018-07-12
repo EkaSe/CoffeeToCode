@@ -5,6 +5,8 @@ function CanvasView ()
     this.canvas = document.getElementById('canvas');
     this.clearButton = document.getElementById('clear-button');
     this.saveButton = document.getElementById('save-button');
+    this.imageList = document.getElementsByClassName("imageList")[0];
+    this.imageListItem = this.imageList.content.querySelector("span");
     
     var self = this;
 
@@ -92,6 +94,12 @@ function CanvasModel()
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send(JSON.stringify(clicks));
     }; 
+
+    this.getImagesList = function(onSuccessFunction){
+        $.getJSON(
+            "/imagesList",
+            onSuccessFunction);
+    };
 };
 
 function CanvasController(canvasView, canvasModel) {
@@ -182,14 +190,31 @@ function CanvasController(canvasView, canvasModel) {
         }
     };
     canvasView.canvasMouseupEvent = e => { this.paint = false; };
+
+    this.showImageList = e =>
+    {
+        canvasModel.getImagesList(
+            function (data)
+            {
+                for (var i in data)
+                {
+                    a = document.importNode(canvasView.imageListItem, true);
+                    a.textContent += data[i];
+                    document.body.appendChild(a);
+                };
+            });     
+    };
 }
 
 var canvasView = new CanvasView();
 var canvasModel = new CanvasModel();
 var canvasController = new CanvasController(canvasView, canvasModel);
 
-
-canvasView.documentBody.onload = function(e) {canvasController.documentBodyOnload(e);};
+canvasView.documentBody.onload = function(e) 
+{
+        canvasController.documentBodyOnload(e);
+        canvasController.showImageList(e);
+};
 
 $(canvasView.clearButton).click(function(e) {canvasController.clearOnSuccess(e)});
 

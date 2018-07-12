@@ -112,6 +112,14 @@
 // "    text-decoration: none;" + 
 // "}" + 
 // "" + 
+// ".imageItem {" + 
+// "    color: white;" + 
+// "    background-color: DodgerBlue;" + 
+// "    padding: 20px;" + 
+// "    text-align: center;" + 
+// "    margin: 10px;" + 
+// "  }" + 
+// "" + 
 // "");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
 //}
@@ -154,7 +162,9 @@
 // "        <canvas id=\"canvas\"></canvas>" + 
 // "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
 // "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <input type=\"hidden\" name=\"imageData\" id=\"imageData\" />" + 
+// "        <template class=\"imageList\">" + 
+// "            <span class=\"imageItem\">Test template</span>" + 
+// "        </template>" + 
 // "    </form>" + 
 // "    <div class=\"bottombar\">" + 
 // "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
@@ -244,6 +254,14 @@
 // "    text-decoration: none;" + 
 // "}" + 
 // "" + 
+// ".imageItem {" + 
+// "    color: white;" + 
+// "    background-color: DodgerBlue;" + 
+// "    padding: 20px;" + 
+// "    text-align: center;" + 
+// "    margin: 10px;" + 
+// "  }" + 
+// "" + 
 // "");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
 //}
@@ -286,7 +304,9 @@
 // "        <canvas id=\"canvas\"></canvas>" + 
 // "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
 // "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <input type=\"hidden\" name=\"imageData\" id=\"imageData\" />" + 
+// "        <template class=\"imageList\">" + 
+// "            <span class=\"imageItem\">Test template</span>" + 
+// "        </template>" + 
 // "    </form>" + 
 // "    <div class=\"bottombar\">" + 
 // "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
@@ -376,6 +396,14 @@
 // "    text-decoration: none;" + 
 // "}" + 
 // "" + 
+// ".imageItem {" + 
+// "    color: white;" + 
+// "    background-color: DodgerBlue;" + 
+// "    padding: 20px;" + 
+// "    text-align: center;" + 
+// "    margin: 10px;" + 
+// "  }" + 
+// "" + 
 // "");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
 //}
@@ -418,7 +446,9 @@
 // "        <canvas id=\"canvas\"></canvas>" + 
 // "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
 // "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <input type=\"hidden\" name=\"imageData\" id=\"imageData\" />" + 
+// "        <template class=\"imageList\">" + 
+// "            <span class=\"imageItem\">Test template</span>" + 
+// "        </template>" + 
 // "    </form>" + 
 // "    <div class=\"bottombar\">" + 
 // "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
@@ -508,6 +538,14 @@
 // "    text-decoration: none;" + 
 // "}" + 
 // "" + 
+// ".imageItem {" + 
+// "    color: white;" + 
+// "    background-color: DodgerBlue;" + 
+// "    padding: 20px;" + 
+// "    text-align: center;" + 
+// "    margin: 10px;" + 
+// "  }" + 
+// "" + 
 // "");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
 //}
@@ -550,7 +588,9 @@
 // "        <canvas id=\"canvas\"></canvas>" + 
 // "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
 // "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <input type=\"hidden\" name=\"imageData\" id=\"imageData\" />" + 
+// "        <template class=\"imageList\">" + 
+// "            <span class=\"imageItem\">Test template</span>" + 
+// "        </template>" + 
 // "    </form>" + 
 // "    <div class=\"bottombar\">" + 
 // "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
@@ -639,6 +679,14 @@
 // "    color: #323436;" + 
 // "    text-decoration: none;" + 
 // "}" + 
+// "" + 
+// "/* .imageItem {" + 
+// "    color: white;" + 
+// "    background-color: DodgerBlue;" + 
+// "    padding: 20px;" + 
+// "    text-align: center;" + 
+// "    margin: 10px;" + 
+// "  } */" + 
 // "" + 
 // "");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();

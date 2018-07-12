@@ -32,12 +32,12 @@ Method: GET
 QueryString: 
 ContentType: 
 
-Path: /CanvasFronted.js
+Path: /jquery.js
 Method: GET
 QueryString: 
 ContentType: 
 
-Path: /jquery.js
+Path: /CanvasFronted.js
 Method: GET
 QueryString: 
 ContentType: 
@@ -52,6 +52,13 @@ Path: /savedData
 Method: GET
 QueryString: 
 ContentType: 
+
+Path: /imagesList
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/HTML
 
 Path: /Canvas
 Method: GET
@@ -86,12 +93,12 @@ Method: GET
 QueryString: 
 ContentType: 
 
-Path: /canvas/save
-Method: POST
+Path: /imagesList
+Method: GET
 QueryString: 
-ContentType: application/json
+ContentType: 
 Status code: 200
-Content type: 
+Content type: text/HTML
 
 Path: /Canvas
 Method: GET
@@ -126,6 +133,13 @@ Method: GET
 QueryString: 
 ContentType: 
 
+Path: /imagesList
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/HTML
+
 Path: /Canvas
 Method: GET
 QueryString: ?Login=qweqwe&pass=qweqwe
@@ -158,3 +172,10 @@ Path: /savedData
 Method: GET
 QueryString: 
 ContentType: 
+
+Path: /imagesList
+Method: GET
+QueryString: 
+ContentType: 
+Status code: 200
+Content type: text/HTML
