@@ -17,14 +17,19 @@
         @{string userName = _context.Request.Query["Login"].ToString();}
         <a href="?Login">Logout</a>
     </div>
+    <span id="image-list-placeholder"></span>
     <form class="canvas" method="POST" accept-charset=utf-8>
         <div>Hello, @userName!</div>
+        <template class="image-list">
+            <div class="image-list">
+                <template class="image-item">
+                    <div class="image-item">Test template</div>
+                </template>
+            </div>
+        </template>
         <canvas id="canvas"></canvas>
         <input type="button" value="Clear" id="clear-button">
-        <input type="button" value="Save" id="save-button">
-        <template class="imageList">
-            <span class="imageItem">Test template</span>
-        </template>
+        <input type="button" value="Save" id="save-button">        
     </form>
     <div class="bottombar">
         <a href="https://github.com/EkaSe/CoffeeToCode/">CoffeeToCode</a>

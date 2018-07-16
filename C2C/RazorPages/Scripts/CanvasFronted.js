@@ -5,8 +5,10 @@ function CanvasView ()
     this.canvas = document.getElementById('canvas');
     this.clearButton = document.getElementById('clear-button');
     this.saveButton = document.getElementById('save-button');
-    this.imageList = document.getElementsByClassName("imageList")[0];
-    this.imageListItem = this.imageList.content.querySelector("span");
+    this.imageListPlaceholder = document.getElementById('image-list-placeholder');
+    this.imageList = document.getElementsByClassName("image-list")[0];
+    //this.imageListItem = //document.getElementsByClassName("imageItem")[0];
+    this.imageListItem =this.imageList.content.querySelector("div");
     
     var self = this;
 
@@ -196,11 +198,14 @@ function CanvasController(canvasView, canvasModel) {
         canvasModel.getImagesList(
             function (data)
             {
+                var a = document.importNode(canvasView.imageList, true);
+                    a.textContent += 'test';
+                    canvasView.imageListPlaceholder.appendChild(a);
                 for (var i in data)
                 {
                     a = document.importNode(canvasView.imageListItem, true);
                     a.textContent += data[i];
-                    document.body.appendChild(a);
+                    canvasView.imageListPlaceholder.appendChild(a);
                 };
             });     
     };

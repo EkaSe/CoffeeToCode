@@ -111,16 +111,71 @@
 // "    color: #323436;" + 
 // "    text-decoration: none;" + 
 // "}" + 
-// "" + 
-// ".imageItem {" + 
+// "/* " + 
+// "  .image-list {" + 
 // "    color: white;" + 
 // "    background-color: DodgerBlue;" + 
 // "    padding: 20px;" + 
 // "    text-align: center;" + 
 // "    margin: 10px;" + 
-// "  }" + 
+// "    align: left;" + 
+// "  }  */" + 
 // "" + 
-// "");
+// " #image-item-placeholder {" + 
+// "    width: 160px;" + 
+// "    position: fixed; " + 
+// "    z-index: 1;" + 
+// "    top: 0; " + 
+// "    left: 0;" + 
+// "    background-color: #111;" + 
+// "    overflow-x: hidden;" + 
+// "    padding-top: 20px;" + 
+// "}" + 
+// "" + 
+// ".image-list {" + 
+// "    padding: 6px 8px 6px 16px;" + 
+// "    text-decoration: none;" + 
+// "    font-size: 25px;" + 
+// "    color: #818181;" + 
+// "    display: block;" + 
+// "}" + 
+// "" + 
+// ".image-list:hover {" + 
+// "    color: #f1f1f1;" + 
+// "}" + 
+// "" + 
+// ".canvas {" + 
+// "    margin-left: 160px;" + 
+// "    padding: 0px 10px;" + 
+// "}");
+//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
+//}
+//}
+
+//favicon.ico
+
+//using System.Text;
+//using System;
+//using Microsoft.AspNetCore.Http;
+//public class Program{
+//public static string Main(object args_context) {
+//HttpContext _context = args_context as HttpContext;
+//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
+//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("");
+//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
+//}
+//}
+
+//favicon.ico
+
+//using System.Text;
+//using System;
+//using Microsoft.AspNetCore.Http;
+//public class Program{
+//public static string Main(object args_context) {
+//HttpContext _context = args_context as HttpContext;
+//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
+//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
 //}
 //}
@@ -155,16 +210,21 @@
 //___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("" + 
 // "        <a href=\"?Login\">Logout</a>" + 
 // "    </div>" + 
+// "    <span id=\"image-list-placeholder\"></span>" + 
 // "    <form class=\"canvas\" method=\"POST\" accept-charset=utf-8>" + 
 // "        <div>Hello, ");
 //___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append(userName.ToString());
 //___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("!</div>" + 
+// "        <template class=\"image-list\">" + 
+// "            <div class=\"image-list\">" + 
+// "                <template class=\"image-item\">" + 
+// "                    <div class=\"image-item\">Test template</div>" + 
+// "                </template>" + 
+// "            </div>" + 
+// "        </template>" + 
 // "        <canvas id=\"canvas\"></canvas>" + 
 // "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
-// "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <template class=\"imageList\">" + 
-// "            <span class=\"imageItem\">Test template</span>" + 
-// "        </template>" + 
+// "        <input type=\"button\" value=\"Save\" id=\"save-button\">        " + 
 // "    </form>" + 
 // "    <div class=\"bottombar\">" + 
 // "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
@@ -253,442 +313,43 @@
 // "    color: #323436;" + 
 // "    text-decoration: none;" + 
 // "}" + 
-// "" + 
-// ".imageItem {" + 
+// "/* " + 
+// "  .image-list {" + 
 // "    color: white;" + 
 // "    background-color: DodgerBlue;" + 
 // "    padding: 20px;" + 
 // "    text-align: center;" + 
 // "    margin: 10px;" + 
-// "  }" + 
+// "    align: left;" + 
+// "  }  */" + 
 // "" + 
-// "");
-//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
-//}
-//}
-
-//Canvas
-
-//using System.Text;
-//using System;
-//using Microsoft.AspNetCore.Http;
-//public class Program{
-//public static string Main(object args_context) {
-//HttpContext _context = args_context as HttpContext;
-//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("<!DOCTYPE>" + 
-// "" + 
-// "<html>" + 
-// "" + 
-// "<head>" + 
-// "    <title>Coffee To Code</title>" + 
-// "    <meta name=\"keywords\" content=\"start\">" + 
-// "    <meta name=\"description\" content=\"ASP.NET - let's start\">" + 
-// "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">" + 
-// "    <meta content=\"utf-8\" http-equiv=\"encoding\">" + 
-// "    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">" + 
-// "</head>" + 
-// "" + 
-// "<body>" + 
-// "    <div class=\"topbar\">" + 
-// "        <a class=\"C2C-logo\" href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
-// "        ");
-//string userName = _context.Request.Query["Login"].ToString();
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("" + 
-// "        <a href=\"?Login\">Logout</a>" + 
-// "    </div>" + 
-// "    <form class=\"canvas\" method=\"POST\" accept-charset=utf-8>" + 
-// "        <div>Hello, ");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append(userName.ToString());
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("!</div>" + 
-// "        <canvas id=\"canvas\"></canvas>" + 
-// "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
-// "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <template class=\"imageList\">" + 
-// "            <span class=\"imageItem\">Test template</span>" + 
-// "        </template>" + 
-// "    </form>" + 
-// "    <div class=\"bottombar\">" + 
-// "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
-// "    </div>" + 
-// "    <script src=\"jquery.js\"></script>" + 
-// "    <script language=\"JavaScript\" type=\"text/javascript\" src=\"CanvasFronted.js\"></script>" + 
-// "</body>" + 
-// "" + 
-// "</html>");
-//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
-//}
-//}
-
-//style.css
-
-//using System.Text;
-//using System;
-//using Microsoft.AspNetCore.Http;
-//public class Program{
-//public static string Main(object args_context) {
-//HttpContext _context = args_context as HttpContext;
-//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("body{" + 
-// "    font-family: Courier, monospace serif;" + 
+// " #image-item-placeholder {" + 
+// "    width: 160px;" + 
+// "    position: fixed; " + 
+// "    z-index: 1;" + 
+// "    top: 0; " + 
+// "    left: 0;" + 
+// "    background-color: #111;" + 
+// "    overflow-x: hidden;" + 
+// "    padding-top: 20px;" + 
 // "}" + 
 // "" + 
-// ".topbar {" + 
-// "    background-color:#323436;" + 
-// "    height:35px;" + 
-// "    margin: -10px;" + 
-// "    text-align: left;" + 
-// "}" + 
-// "" + 
-// ".topbar a {" + 
-// "    color: white;" + 
+// ".image-list {" + 
+// "    padding: 6px 8px 6px 16px;" + 
 // "    text-decoration: none;" + 
-// "    padding: 10px;" + 
-// "    line-height: 35px;" + 
+// "    font-size: 25px;" + 
+// "    color: #818181;" + 
+// "    display: block;" + 
 // "}" + 
 // "" + 
-// ".topbar .C2C-logo {" + 
-// "    color: #C5FFFA;" + 
-// "    line-height: 35px;" + 
-// "    margin-left: 15px;" + 
-// "    display: inline;" + 
-// "    font-weight: bold;" + 
+// ".image-list:hover {" + 
+// "    color: #f1f1f1;" + 
 // "}" + 
 // "" + 
 // ".canvas {" + 
-// "    text-align: center;" + 
-// "}" + 
-// "" + 
-// ".canvas div {" + 
-// "    margin-top:25px;" + 
-// "}" + 
-// "" + 
-// "#canvas {" + 
-// "    border:1px solid #323436; " + 
-// "    margin-top:25px;" + 
-// "    width: 60%;" + 
-// "}" + 
-// "" + 
-// ".loginform {" + 
-// "    text-align: center;" + 
-// "    margin: 25px;" + 
-// "    line-height: 45px;" + 
-// "}" + 
-// "" + 
-// ".login-submit {" + 
-// "    margin-top: 15px; " + 
-// "    font-family: inherit;" + 
-// "}" + 
-// "" + 
-// ".bottombar {" + 
-// "    position: fixed;" + 
-// "    height: 35px;" + 
-// "    bottom: 0px;" + 
-// "    left: 0px;" + 
-// "    right: 0px;" + 
-// "    margin-bottom: 0px;" + 
-// "    color: #323436;" + 
-// "    text-align: center;" + 
-// "}" + 
-// "" + 
-// ".bottombar a {" + 
-// "    color: #323436;" + 
-// "    text-decoration: none;" + 
-// "}" + 
-// "" + 
-// ".imageItem {" + 
-// "    color: white;" + 
-// "    background-color: DodgerBlue;" + 
-// "    padding: 20px;" + 
-// "    text-align: center;" + 
-// "    margin: 10px;" + 
-// "  }" + 
-// "" + 
-// "");
-//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
-//}
-//}
-
-//Canvas
-
-//using System.Text;
-//using System;
-//using Microsoft.AspNetCore.Http;
-//public class Program{
-//public static string Main(object args_context) {
-//HttpContext _context = args_context as HttpContext;
-//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("<!DOCTYPE>" + 
-// "" + 
-// "<html>" + 
-// "" + 
-// "<head>" + 
-// "    <title>Coffee To Code</title>" + 
-// "    <meta name=\"keywords\" content=\"start\">" + 
-// "    <meta name=\"description\" content=\"ASP.NET - let's start\">" + 
-// "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">" + 
-// "    <meta content=\"utf-8\" http-equiv=\"encoding\">" + 
-// "    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">" + 
-// "</head>" + 
-// "" + 
-// "<body>" + 
-// "    <div class=\"topbar\">" + 
-// "        <a class=\"C2C-logo\" href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
-// "        ");
-//string userName = _context.Request.Query["Login"].ToString();
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("" + 
-// "        <a href=\"?Login\">Logout</a>" + 
-// "    </div>" + 
-// "    <form class=\"canvas\" method=\"POST\" accept-charset=utf-8>" + 
-// "        <div>Hello, ");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append(userName.ToString());
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("!</div>" + 
-// "        <canvas id=\"canvas\"></canvas>" + 
-// "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
-// "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <template class=\"imageList\">" + 
-// "            <span class=\"imageItem\">Test template</span>" + 
-// "        </template>" + 
-// "    </form>" + 
-// "    <div class=\"bottombar\">" + 
-// "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
-// "    </div>" + 
-// "    <script src=\"jquery.js\"></script>" + 
-// "    <script language=\"JavaScript\" type=\"text/javascript\" src=\"CanvasFronted.js\"></script>" + 
-// "</body>" + 
-// "" + 
-// "</html>");
-//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
-//}
-//}
-
-//style.css
-
-//using System.Text;
-//using System;
-//using Microsoft.AspNetCore.Http;
-//public class Program{
-//public static string Main(object args_context) {
-//HttpContext _context = args_context as HttpContext;
-//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("body{" + 
-// "    font-family: Courier, monospace serif;" + 
-// "}" + 
-// "" + 
-// ".topbar {" + 
-// "    background-color:#323436;" + 
-// "    height:35px;" + 
-// "    margin: -10px;" + 
-// "    text-align: left;" + 
-// "}" + 
-// "" + 
-// ".topbar a {" + 
-// "    color: white;" + 
-// "    text-decoration: none;" + 
-// "    padding: 10px;" + 
-// "    line-height: 35px;" + 
-// "}" + 
-// "" + 
-// ".topbar .C2C-logo {" + 
-// "    color: #C5FFFA;" + 
-// "    line-height: 35px;" + 
-// "    margin-left: 15px;" + 
-// "    display: inline;" + 
-// "    font-weight: bold;" + 
-// "}" + 
-// "" + 
-// ".canvas {" + 
-// "    text-align: center;" + 
-// "}" + 
-// "" + 
-// ".canvas div {" + 
-// "    margin-top:25px;" + 
-// "}" + 
-// "" + 
-// "#canvas {" + 
-// "    border:1px solid #323436; " + 
-// "    margin-top:25px;" + 
-// "    width: 60%;" + 
-// "}" + 
-// "" + 
-// ".loginform {" + 
-// "    text-align: center;" + 
-// "    margin: 25px;" + 
-// "    line-height: 45px;" + 
-// "}" + 
-// "" + 
-// ".login-submit {" + 
-// "    margin-top: 15px; " + 
-// "    font-family: inherit;" + 
-// "}" + 
-// "" + 
-// ".bottombar {" + 
-// "    position: fixed;" + 
-// "    height: 35px;" + 
-// "    bottom: 0px;" + 
-// "    left: 0px;" + 
-// "    right: 0px;" + 
-// "    margin-bottom: 0px;" + 
-// "    color: #323436;" + 
-// "    text-align: center;" + 
-// "}" + 
-// "" + 
-// ".bottombar a {" + 
-// "    color: #323436;" + 
-// "    text-decoration: none;" + 
-// "}" + 
-// "" + 
-// ".imageItem {" + 
-// "    color: white;" + 
-// "    background-color: DodgerBlue;" + 
-// "    padding: 20px;" + 
-// "    text-align: center;" + 
-// "    margin: 10px;" + 
-// "  }" + 
-// "" + 
-// "");
-//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
-//}
-//}
-
-//Canvas
-
-//using System.Text;
-//using System;
-//using Microsoft.AspNetCore.Http;
-//public class Program{
-//public static string Main(object args_context) {
-//HttpContext _context = args_context as HttpContext;
-//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("<!DOCTYPE>" + 
-// "" + 
-// "<html>" + 
-// "" + 
-// "<head>" + 
-// "    <title>Coffee To Code</title>" + 
-// "    <meta name=\"keywords\" content=\"start\">" + 
-// "    <meta name=\"description\" content=\"ASP.NET - let's start\">" + 
-// "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">" + 
-// "    <meta content=\"utf-8\" http-equiv=\"encoding\">" + 
-// "    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">" + 
-// "</head>" + 
-// "" + 
-// "<body>" + 
-// "    <div class=\"topbar\">" + 
-// "        <a class=\"C2C-logo\" href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
-// "        ");
-//string userName = _context.Request.Query["Login"].ToString();
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("" + 
-// "        <a href=\"?Login\">Logout</a>" + 
-// "    </div>" + 
-// "    <form class=\"canvas\" method=\"POST\" accept-charset=utf-8>" + 
-// "        <div>Hello, ");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append(userName.ToString());
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("!</div>" + 
-// "        <canvas id=\"canvas\"></canvas>" + 
-// "        <input type=\"button\" value=\"Clear\" id=\"clear-button\">" + 
-// "        <input type=\"button\" value=\"Save\" id=\"save-button\">" + 
-// "        <template class=\"imageList\">" + 
-// "            <span class=\"imageItem\">Test template</span>" + 
-// "        </template>" + 
-// "    </form>" + 
-// "    <div class=\"bottombar\">" + 
-// "        <a href=\"https://github.com/EkaSe/CoffeeToCode/\">CoffeeToCode</a>" + 
-// "    </div>" + 
-// "    <script src=\"jquery.js\"></script>" + 
-// "    <script language=\"JavaScript\" type=\"text/javascript\" src=\"CanvasFronted.js\"></script>" + 
-// "</body>" + 
-// "" + 
-// "</html>");
-//return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
-//}
-//}
-
-//style.css
-
-//using System.Text;
-//using System;
-//using Microsoft.AspNetCore.Http;
-//public class Program{
-//public static string Main(object args_context) {
-//HttpContext _context = args_context as HttpContext;
-//var ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq = new StringBuilder("");
-//___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.Append("body{" + 
-// "    font-family: Courier, monospace serif;" + 
-// "}" + 
-// "" + 
-// ".topbar {" + 
-// "    background-color:#323436;" + 
-// "    height:35px;" + 
-// "    margin: -10px;" + 
-// "    text-align: left;" + 
-// "}" + 
-// "" + 
-// ".topbar a {" + 
-// "    color: white;" + 
-// "    text-decoration: none;" + 
-// "    padding: 10px;" + 
-// "    line-height: 35px;" + 
-// "}" + 
-// "" + 
-// ".topbar .C2C-logo {" + 
-// "    color: #C5FFFA;" + 
-// "    line-height: 35px;" + 
-// "    margin-left: 15px;" + 
-// "    display: inline;" + 
-// "    font-weight: bold;" + 
-// "}" + 
-// "" + 
-// ".canvas {" + 
-// "    text-align: center;" + 
-// "}" + 
-// "" + 
-// ".canvas div {" + 
-// "    margin-top:25px;" + 
-// "}" + 
-// "" + 
-// "#canvas {" + 
-// "    border:1px solid #323436; " + 
-// "    margin-top:25px;" + 
-// "    width: 60%;" + 
-// "}" + 
-// "" + 
-// ".loginform {" + 
-// "    text-align: center;" + 
-// "    margin: 25px;" + 
-// "    line-height: 45px;" + 
-// "}" + 
-// "" + 
-// ".login-submit {" + 
-// "    margin-top: 15px; " + 
-// "    font-family: inherit;" + 
-// "}" + 
-// "" + 
-// ".bottombar {" + 
-// "    position: fixed;" + 
-// "    height: 35px;" + 
-// "    bottom: 0px;" + 
-// "    left: 0px;" + 
-// "    right: 0px;" + 
-// "    margin-bottom: 0px;" + 
-// "    color: #323436;" + 
-// "    text-align: center;" + 
-// "}" + 
-// "" + 
-// ".bottombar a {" + 
-// "    color: #323436;" + 
-// "    text-decoration: none;" + 
-// "}" + 
-// "" + 
-// "/* .imageItem {" + 
-// "    color: white;" + 
-// "    background-color: DodgerBlue;" + 
-// "    padding: 20px;" + 
-// "    text-align: center;" + 
-// "    margin: 10px;" + 
-// "  } */" + 
-// "" + 
-// "");
+// "    margin-left: 160px;" + 
+// "    padding: 0px 10px;" + 
+// "}");
 //return ___flcrbckj8yjtyfpdf1568632ybtKJBKSDs1jlyj4568qg32156thtvtyyjq.ToString();
 //}
 //}

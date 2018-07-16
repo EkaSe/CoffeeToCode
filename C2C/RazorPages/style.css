@@ -64,12 +64,40 @@ body{
     color: #323436;
     text-decoration: none;
 }
-
-/* .imageItem {
+/* 
+  .image-list {
     color: white;
     background-color: DodgerBlue;
     padding: 20px;
     text-align: center;
     margin: 10px;
-  } */
+    align: left;
+  }  */
 
+ #image-item-placeholder {
+    width: 160px;
+    position: fixed; 
+    z-index: 1;
+    top: 0; 
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.image-list {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.image-list:hover {
+    color: #f1f1f1;
+}
+
+.canvas {
+    margin-left: 160px;
+    padding: 0px 10px;
+}
